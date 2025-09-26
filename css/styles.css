@@ -1,0 +1,269 @@
+:root {
+  --bg: #ffeef3;
+  --accent: #e76b8c;
+  --muted: #ffedf2;
+  --card: #ffffff;
+  --text: #7a1f33;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: linear-gradient(to bottom, #ffd6e8, #ffe6eb, #fff0f5);
+  background-color: var(--bg);
+}
+
+/* Kontainer utama */
+.phone {
+  width: 100%;
+  height: 100vh;        /* full tinggi layar */
+  max-width: 414px;     /* khusus iPhone 11 biar pas */
+  margin: 0 auto;       /* center di desktop */
+  border-radius: 0;     /* kalau mau full tanpa rounded */
+  background: var(--bg);
+  box-shadow: none;     /* hilangkan shadow kalau full */
+  overflow-y: auto;     /* biar bisa scroll kalau konten lebih panjang */
+  border: none;         /* hapus border putih */
+}
+.top {
+  padding: 20px;
+  text-align: center;
+}
+
+.greetings {
+  font-weight: 700;
+  color: var(--text);
+  font-size: clamp(18px, 2.5vw, 24px);
+  line-height: 1.2;
+}
+.greetings #namePlaceholder {
+  display: block;
+  font-size: clamp(20px, 3vw, 26px);
+  color: var(--accent);
+}
+
+/* Grid ikon */
+.app-grid {
+  flex: 1; /* ambil ruang tersisa */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 20px;
+  align-content: center;   /* center vertical */
+  justify-items: center;   /* center horizontal */
+}
+
+.app-icon {
+  background: transparent;
+  border: 0;
+  outline: none;
+  padding: 6px;
+  border-radius: 14px;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+}
+.app-icon .circle {
+  width: clamp(70px, 18vw, 90px);
+  height: clamp(70px, 18vw, 90px);
+  border-radius: 22px;
+  background: var(--card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 8px;
+  font-size: clamp(24px, 6vw, 34px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+}
+.label {
+  font-size: clamp(12px, 2.5vw, 16px);
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Titik navigasi */
+.dots {
+  text-align: center;
+  padding-bottom: 8px;
+}
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffd3e1;
+  opacity: .6;
+  margin: 0 4px;
+}
+.dot.active {
+  background: var(--accent);
+  opacity: 1;
+}
+
+/* Modal */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 40;
+}
+.hidden { display: none; }
+.modal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 92%;
+  max-width: 500px; /* biar bagus di desktop */
+  background: var(--card);
+  z-index: 50;
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+}
+.modal h2 {
+  margin: 0 0 12px;
+  color: var(--accent);
+}
+.closeBtn {
+  position: absolute;
+  right: 12px;
+  top: 10px;
+  border: 0;
+  background: transparent;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* Gallery */
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 8px;
+}
+.galleryGrid img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Notes */
+.notesList {
+  max-height: 40vh;
+  overflow: auto;
+  margin-bottom: 8px;
+}
+.notesList .note {
+  background: var(--muted);
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+}
+textarea {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+.row {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 0;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+button.ghost {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid #ffd8e4;
+}
+.small button {
+  padding: 6px 8px;
+}
+
+/* Countdown */
+.bigTime {
+  font-size: clamp(20px, 4vw, 36px);
+  text-align: center;
+  margin: 10px 0;
+  color: var(--text);
+}
+
+#gameBoard {
+  display: grid;
+  grid-template-columns: repeat(3, 100px); /* 3 kolom (3x3 puzzle) */
+  grid-template-rows: repeat(3, 100px);    /* 3 baris */
+  gap: 2px;
+  width: 302px;   /* 3x100 + 2x2 gap */
+  height: 302px;
+  margin: 0 auto;
+  border: 2px solid #fff;
+  background: #eee;
+}
+
+.puzzlePiece {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: 300px 300px; /* biar gambar pas 3x3 */
+}
+
+
+/* Gift */
+.giftWrap {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+}
+.giftWrap .box {
+  font-size: clamp(40px, 10vw, 80px);
+}
+#confettiArea {
+  position: relative;
+  width: 100%;
+  height: 140px;
+}
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 18px;
+  opacity: 0.9;
+}
+
+/* RESPONSIVE */
+@media (min-width: 768px) {
+  .phone {
+    max-width: 600px;
+  }
+  .app-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px;
+  }
+  .phone {
+    max-width: 700px;
+  }
+}

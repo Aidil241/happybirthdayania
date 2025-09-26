@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Photobooth Online</title>
+  <link rel="stylesheet" href="/css/photobooth.css">
+  <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h2>🎉 Photobooth Ulang Tahun 🎉</h2>
+
+    <!-- Kamera -->
+    <video id="video" autoplay></video>
+    <br>
+
+    <!-- Tombol Pilih Frame -->
+    <button class="btn" onclick="setFrame('ungu')">Frame Ungu (3 foto)</button>
+    <button class="btn-red" onclick="setFrame('merah')">Frame Merah (2 foto)</button>
+    <br>
+
+    <!-- Tombol Foto / Upload -->
+    <button onclick="takePhoto()">📸 Ambil Foto</button>
+    <label class="btn-red" for="fileInput">📂 Upload Foto</label>
+    <input type="file" id="fileInput" accept="image/*">
+    <br>
+
+    <!-- Kontrol -->
+    <button onclick="finalize()">✅ Kunci Foto & Simpan</button>
+    <button onclick="downloadFinal()">💾 Download Hasil</button>
+    <button onclick="goHome()">🏠 Kembali ke Halaman Awal</button>
+
+    <h3>Editor:</h3>
+    <div id="editor">
+      <canvas id="frameCanvas"></canvas>
+    </div>
+  </div>
+
+  <script>
+    function goHome() {
+      // kalau photobooth.html ada di folder /photobooth
+      window.location.href = "../index.html";
+    }
+
+    const video = document.getElementById('video');
+    const frameCanvas = document.getElementById('frameCanvas');
+    const ctx = frameCanvas.getContext('2d');
+    const fileInput = document.getElementById('fileInput');
+    const editor = document.getElementById('editor');
+
+    let frameImg = new Image();
+    let frameType = 'ungu';
+    let slotIndex = 0;
+    let slots = [];
+
+    const slotPositions = {
+      ungu: [
+        {x: 52, y: 73, w: 595, h: 510},
+        {x: 47, y: 635, w: 605, h: 512},
+        {x: 50, y: 1197, w: 606, h: 512}
+      ],
+      merah: [
+        {x: 92, y: 251, w: 413, h: 385},
+        {x: 89, y: 912, w: 419, h: 389}
+      ]
+    };
+
+    navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+      video.srcObject = stream;
+    });
+
+    function setFrame(type) {
+      frameType = type;
+      slotIndex = 0;
+      slots = [];
+      frameImg.src = type === 'ungu' ? 'PB(1).png' : 'PB(2).png';
+      frameImg.onload = () => {
+        frameCanvas.width = frameImg.width;
+        frameCanvas.height = frameImg.height;
+        ctx.drawImage(frameImg, 0, 0);
+      };
+    }
+
+    function addDraggable(imgSrc) {
+      if (slotIndex >= slotPositions[frameType].length) {
+        alert("Semua slot sudah terisi!");
+        return;
+      }
+      const slot = slotPositions[frameType][slotIndex];
+      const div = document.createElement('div');
+      div.classList.add('draggable');
+      div.style.left = slot.x / 4 + 'px';
+      div.style.top = slot.y / 4 + 'px';
+      div.style.width = slot.w / 4 + 'px';
+      div.style.height = slot.h / 4 + 'px';
+      div.dataset.x = 0;
+      div.dataset.y = 0;
+      div.dataset.angle = 0;
+
+      const img = document.createElement('img');
+      img.src = imgSrc;
+      div.appendChild(img);
+      editor.appendChild(div);
+
+      interact(div)
+        .draggable({
+          listeners: {
+            move(event) {
+              const target = event.target;
+              let x = (parseFloat(target.dataset.x) || 0) + event.dx;
+              let y = (parseFloat(target.dataset.y) || 0) + event.dy;
+              target.dataset.x = x;
+              target.dataset.y = y;
+              updateTransform(target);
+            }
+          }
+        })
+        .resizable({
+          edges: { left: true, right: true, bottom: true, top: true },
+        })
+        .on('resizemove', event => {
+          event.target.style.width = event.rect.width + 'px';
+          event.target.style.height = event.rect.height + 'px';
+        })
+        .gesturable({
+          listeners: {
+            move(event) {
+              const target = event.target;
+              let angle = (parseFloat(target.dataset.angle) || 0) + event.da;
+              target.dataset.angle = angle;
+              updateTransform(target);
+            }
+          }
+        });
+    }
+
+    function updateTransform(target) {
+      const x = target.dataset.x || 0;
+      const y = target.dataset.y || 0;
+      const angle = target.dataset.angle || 0;
+      target.style.transform = `translate(${x}px, ${y}px) rotate(${angle}deg)`;
+    }
+
+    function takePhoto() {
+      const tempCanvas = document.createElement('canvas');
+      tempCanvas.width = 400;
+      tempCanvas.height = 300;
+      const tempCtx = tempCanvas.getContext('2d');
+      tempCtx.drawImage(video, 0, 0, tempCanvas.width, tempCanvas.height);
+      addDraggable(tempCanvas.toDataURL());
+    }
+
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = ev => addDraggable(ev.target.result);
+      reader.readAsDataURL(file);
+    });
+
+    function finalize() {
+      const draggables = document.querySelectorAll('.draggable');
+      if (draggables.length === 0) {
+        alert("Belum ada foto untuk diproses!");
+        return;
+      }
+      const target = draggables[0];
+      const img = target.querySelector('img');
+      const slot = slotPositions[frameType][slotIndex];
+
+      const tempCanvas = document.createElement('canvas');
+      tempCanvas.width = slot.w;
+      tempCanvas.height = slot.h;
+      const tempCtx = tempCanvas.getContext('2d');
+
+      const angle = (parseFloat(target.dataset.angle) || 0) * Math.PI / 180;
+      tempCtx.translate(slot.w / 2, slot.h / 2);
+      tempCtx.rotate(angle);
+      tempCtx.drawImage(img, -slot.w / 2, -slot.h / 2, slot.w, slot.h);
+      tempCtx.resetTransform();
+
+      slots.push({img: tempCanvas, pos: slot});
+      slotIndex++;
+      target.remove();
+      redrawCanvas();
+    }
+
+    function redrawCanvas() {
+      ctx.clearRect(0, 0, frameCanvas.width, frameCanvas.height);
+      slots.forEach(s => ctx.drawImage(s.img, s.pos.x, s.pos.y, s.pos.w, s.pos.h));
+      ctx.drawImage(frameImg, 0, 0);
+    }
+
+    function downloadFinal() {
+      const link = document.createElement('a');
+      link.download = 'photobooth.png';
+      link.href = frameCanvas.toDataURL();
+      link.click();
+    }
+
+    setFrame('ungu');
+  </script>
+</body>
+</html>

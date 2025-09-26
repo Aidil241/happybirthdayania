@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery</title>
+  <link rel="stylesheet" href="css/styles.css">   <!-- CSS global -->
+  <link rel="stylesheet" href="css/gallery.css"> <!-- CSS gallery -->
+</head>
+<body>
+
+  <header>📸 My Gallery</header>
+
+  <a href="index.html" class="back-btn">⬅ Kembali ke Menu</a>
+
+  <div class="gallery-container">
+    <img src="Asset/gallery1.jpg" alt="Foto 1">
+    <img src="Asset/gallery2.jpg" alt="Foto 2">
+    <img src="Asset/gallery3.jpg" alt="Foto 3">
+    <img src="Asset/gallery4.jpg" alt="Foto 4">
+    <img src="Asset/gallery5.jpg" alt="Foto 5">
+    <img src="Asset/gallery6.jpg" alt="Foto 6">
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox hidden">
+    <span class="close">&times;</span>
+    <img class="lightbox-img" src="" alt="preview">
+    <a class="prev">&#10094;</a>
+    <a class="next">&#10095;</a>
+  </div>
+
+  <script src="js/gallery.js"></script>
+</body>
+</html>
