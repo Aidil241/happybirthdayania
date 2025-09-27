@@ -32,6 +32,10 @@ video {
   max-width: 100%;
   padding: 10px;
   border-radius: 8px;
+
+  /* tambahan */
+  touch-action: none;
+  user-select: none;
 }
 
 #frameCanvas {
@@ -49,6 +53,12 @@ video {
   overflow: hidden;
   transform-origin: center center;
   z-index: 5;
+
+  /* tambahan */
+  touch-action: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  will-change: transform;
 }
 
 .draggable img {
