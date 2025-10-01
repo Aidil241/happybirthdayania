@@ -1,5 +1,5 @@
 :root {
-  --bg: #ffeef3;
+  /* --bg: #ffeef3;  */
   --accent: #e76b8c;
   --muted: #ffedf2;
   --card: #ffffff;
@@ -14,10 +14,9 @@ html, body {
   height: 100%;
   margin: 0;
   font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-  background: linear-gradient(to bottom, #ffd6e8, #ffe6eb, #fff0f5);
+  background: linear-gradient(to bottom, #ffe6eb, #ffe6eb, #ffe6eb);
   background-color: var(--bg);
 }
-
 /* Kontainer utama */
 .phone {
   width: 100%;
@@ -29,6 +28,7 @@ html, body {
   box-shadow: none;     /* hilangkan shadow kalau full */
   overflow-y: auto;     /* biar bisa scroll kalau konten lebih panjang */
   border: none;         /* hapus border putih */
+  display: block;
 }
 .top {
   padding: 20px;
@@ -171,6 +171,7 @@ textarea {
   padding: 8px;
   border-radius: 8px;
   border: 1px solid #eee;
+  
 }
 .row {
   display: flex;
@@ -187,6 +188,12 @@ button {
   font-weight: 700;
   cursor: pointer;
 }
+.closeBtn {
+color: #333;
+cursor: pointer
+;
+}
+
 button.ghost {
   background: transparent;
   color: var(--accent);
@@ -246,6 +253,97 @@ button.ghost {
   height: 18px;
   opacity: 0.9;
 }
+
+/* Spotify Modal */
+.song-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.song {
+  padding: 10px;
+  border-radius: 8px;
+  background: #f0f0f0;
+  cursor: pointer;
+}
+.song:hover { background: #ddd; }
+
+.player {
+  background: #222;
+  color: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+}
+.player img {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+.controls button {
+  margin: 0 5px;
+  font-size: 18px;
+}
+#progressBar, #volumeControl {
+  width: 100%;
+  margin: 8px 0;
+}
+
+.simple-controls {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 15px;
+}
+
+.simple-controls button {
+  font-size: 20px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  background: #333;
+  color: #fff;
+  cursor: pointer;
+}
+
+.simple-controls button:hover {
+  background: #555;
+}
+
+
+/* MUSIC FOOTER */
+.music-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #222;
+  color: #fff;
+  padding: 10px;
+  display: none;   /* disembunyikan dulu */
+  justify-content: space-between;
+  align-items: center;
+  z-index: 30;     /* lebih rendah dari modal (40/50) */
+}
+.music-footer img {
+  width: 50px; height: 50px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.music-footer .info { flex: 1; }
+.controls button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+.song-list { list-style: none; padding: 0; }
+.song { padding: 8px; border-bottom: 1px solid #333; cursor: pointer; }
+.song:hover { background: #333; }
+
 
 /* RESPONSIVE */
 @media (min-width: 768px) {

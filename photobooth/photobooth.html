@@ -14,6 +14,10 @@
     <video id="video" autoplay></video>
     <br>
 
+    <!-- Tombol Mirror -->
+    <button onclick="toggleMirror()">🔄 Mirror On/Off</button>
+    <br><br>
+
     <!-- Tombol Pilih Frame -->
     <button class="btn" onclick="setFrame('ungu')">Frame Ungu (3 foto)</button>
     <button class="btn-red" onclick="setFrame('merah')">Frame Merah (2 foto)</button>
@@ -52,6 +56,9 @@
   let slotIndex = 0;
   let slots = [];
 
+  // mirror flag
+  let isMirror = false;
+
   const slotPositions = {
     ungu: [
       {x: 52, y: 73, w: 595, h: 510},
@@ -67,6 +74,15 @@
   navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
     video.srcObject = stream;
   });
+
+  function toggleMirror() {
+    isMirror = !isMirror;
+    if (isMirror) {
+      video.style.transform = "scaleX(-1)";
+    } else {
+      video.style.transform = "scaleX(1)";
+    }
+  }
 
   function setFrame(type) {
     frameType = type;
@@ -158,6 +174,13 @@
     tempCanvas.width = 400;
     tempCanvas.height = 300;
     const tempCtx = tempCanvas.getContext('2d');
+
+    if (isMirror) {
+      // Jika mirror aktif, balik hasil fotonya
+      tempCtx.translate(tempCanvas.width, 0);
+      tempCtx.scale(-1, 1);
+    }
+
     tempCtx.drawImage(video, 0, 0, tempCanvas.width, tempCanvas.height);
     addDraggable(tempCanvas.toDataURL());
   }

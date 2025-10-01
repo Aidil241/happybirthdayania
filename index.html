@@ -7,104 +7,140 @@
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-  <main class="phone">
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <div class="loading-box">
+      <p>Loading...</p>
+      <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+      <span id="progress-text">0%</span>
+    </div>
+  </div>
+
+  <div class="phone" id="main-content" style="display:none;">
     <header class="top">
       <div class="greetings">Happy Birthday<br><span id="namePlaceholder">Nazhara Kania</span> 🎉</div>
     </header>
 
+    <!-- GRID APLIKASI -->
     <section class="app-grid" id="appGrid">
       <a href="gallery.html" class="app-icon" aria-label="Gallery">
-        <div class="circle"> <img src="Asset/Images/icons8-gallery-64.png" alt="Gallery"></div>
+        <div class="circle"><img src="Asset/Images/icons8-gallery-64.png" alt="Gallery"></div>
         <div class="label">Gallery</div>
       </a>
-      <button class="app-icon" data-app="loveNotes" aria-label="Love Notes">
+
+      <button class="app-icon" data-app="loveNotes">
         <div class="circle">💌</div>
         <div class="label">Love Notes</div>
       </button>
-      <a href="photobooth/photobooth.html" class="app-icon" aria-label="Photo Booth">
-  <div class="circle">📸</div>
-  <div class="label">Photo Booth</div>
-</a>
 
-      <button class="app-icon" data-app="game" aria-label="Mini Game">
-        <div class="circle">🎮</div>
+      <a href="photobooth/photobooth.html" class="app-icon" aria-label="Photo Booth">
+        <div class="circle"> <img src="Asset/Images/icons8-webcam-64.png" alt="Photobooth"></div>
+        <div class="label">PhotoBooth</div>
+      </a>
+
+      <button class="app-icon" data-app="game">
+        <div class="circle"> <img src="Asset/Images/icons8-puzzle-64.png" alt="Puzzle"></div>
         <div class="label">Mini Game</div>
       </button>
-          <a href="spotify.html" class="app-icon" aria-label="Spotify">
-      <div class="circle">
-        <img src="Asset/Images/spotify.png" alt="spotify">
-      </div>
-      <div class="label">Spotify</div>
-    </a>
-    <button class="app-icon" data-app="sendMessage" aria-label="Send Message">
-      <div class="circle">✉️</div>
-      <div class="label">Send Msg</div>
-    </button>
-    
+
+      <!-- Tombol buka modal Musik -->
+      <button class="app-icon" data-app="music">
+        <div class="circle"><img src="Asset/Images/icons8-music-64.png" alt="Music"></div>
+        <div class="label">Music</div>
+      </button>
+
+      <button class="app-icon" data-app="sendMessage">
+        <div class="circle">✉️</div>
+        <div class="label">Send Msg</div>
+      </button>
     </section>
 
+    <!-- DOTS -->
     <nav class="dots">
       <span class="dot active"></span>
       <span class="dot"></span>
       <span class="dot"></span>
     </nav>
+  </main>
 
-    <div id="overlay" class="overlay hidden"></div>
+  <!-- Overlay -->
+  <div id="overlay" class="overlay hidden"></div>
 
-       <div id="modalLoveNotes" class="modal hidden">
+  <!-- ==== MODAL LOVE NOTES ==== -->
+<div id="modalLoveNotes" class="modal hidden">
   <button class="closeBtn" data-close>&times;</button>
   <h2>Love Notes 💌</h2>
   <div class="notesList">
-    <div class="note">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam imperdiet quam fringilla libero rutrum lobortis. Nam id vulputate odio. Cras molestie quis ante et vestibulum. Nullam viverra leo quis libero vulputate ultricies sit amet et lorem. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas vestibulum ligula ac tortor faucibus, eget viverra elit faucibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vestibulum eu diam interdum, luctus velit in, vehicula erat. Aliquam dapibus mauris eget nulla faucibus, vitae commodo massa placerat. Nam luctus felis nec fermentum lobortis. Aliquam ac odio a neque suscipit mollis. Cras sit amet felis dolor. Nam consequat, nulla vitae lacinia malesuada, ipsum nibh pulvinar mi, sit amet eleifend elit velit id nulla. Cras pretium elit luctus, laoreet turpis sed, scelerisque tellus. Fusce venenatis feugiat diam, id tristique ligula pellentesque vitae.
-
- </div>
+    <div class="note">
+      Selamat Ulang Tahun, Nazhara Kania 🎉  
+      Semoga harimu selalu penuh kebahagiaan, cinta, dan senyum.  
+      Aku sangat bersyukur punya kamu dalam hidupku 💖
+    </div>
   </div>
 </div>
 
-
-    <div id="modalGame" class="modal hidden">
-      <button class="closeBtn" data-close>&times;</button>
-      <h2>Mini Puzzle</h2>
-      <div id="gameBoard" class="gameBoard"></div>
-      <div class="row small">
+  <!-- ==== MODAL GAME ==== -->
+  <div id="modalGame" class="modal hidden">
+    <button class="closeBtn" data-close>&times;</button>
+    <h2>Mini Puzzle</h2>
+    <div id="gameBoard" class="gameBoard"></div>
+    <div class="row small">
       <button id="restartGame">Ulangi</button>
       <button id="nextPuzzle" class="hidden">Next</button>
       <button id="finishPuzzle" class="hidden">Selesai</button>
     </div>
-    </div>
+  </div>
 
-    <div id="modalMusic" class="modal hidden">
-      <button class="closeBtn" data-close>&times;</button>
-      <h2>Playlist</h2>
-      <audio id="player" controls>
-        <source src="" id="audioSource">
-        Browser tidak mendukung audio.
-      </audio>
-      <div class="row small">
-        <input id="audioUrl" placeholder="Masukkan URL audio" />
-        <button id="setAudio">Set</button>
+  <!-- ==== MODAL MUSIC (playlist) ==== -->
+<div id="modalMusic" class="modal hidden">
+  <button class="closeBtn" data-close>&times;</button>
+  <h2>Pilih Lagu</h2>
+  <ul class="song-list">
+    <li class="song" data-index="0">🎵 Lagu 1 - Artist A</li>
+    <li class="song" data-index="1">🎵 Lagu 2 - Artist B</li>
+    <li class="song" data-index="2">🎵 Lagu 3 - Artist C</li>
+    <li class="song" data-index="3">🎵 Lagu 4 - Artist D</li>
+    <li class="song" data-index="4">🎵 Lagu 5 - Artist E</li>
+    <li class="song" data-index="5">🎵 Lagu 6 - Artist A</li>
+    <li class="song" data-index="6">🎵 Lagu 7 - Artist B</li>
+    <li class="song" data-index="7">🎵 Lagu 8 - Artist C</li>
+    <li class="song" data-index="8">🎵 Lagu 9 - Artist D</li>
+    <li class="song" data-index="9">🎵 Lagu 10 - Artist E</li>
+  </ul>
+
+  <!-- ==== SIMPLE PLAYER CONTROL ==== -->
+  <div class="simple-controls">
+    <button id="prevBtn">⏮</button>
+    <button id="playPauseBtn">⏯</button>
+    <button id="nextBtn">⏭</button>
+  </div>
+  <!-- Teks judul lagu yang sedang diputar -->
+  <p id="nowPlaying" style="text-align:center; margin-top:10px; font-weight:600;">
+    Tidak ada lagu diputar
+  </p>
+  <audio id="globalPlayer"></audio>
+</div>
+
+
+  <!-- ==== MODAL SEND MESSAGE ==== -->
+  <div id="modalSendMessage" class="modal hidden">
+    <button class="closeBtn" data-close>&times;</button>
+    <h2>Kirim Pesan 📩</h2>
+    <form id="messageForm" class="notesForm" action="https://formspree.io/f/xjkakqdg" method="POST">
+      <input type="text" name="name" id="senderName" placeholder="Nama kamu" required />
+      <textarea name="message" id="senderMessage" placeholder="Tulis pesan untuk Aidil ❤️" required></textarea>
+      <div class="row">
+        <button type="submit">Kirim</button>
       </div>
-    </div>
-
-            <div id="modalSendMessage" class="modal hidden">
-      <button class="closeBtn" data-close>&times;</button>
-      <h2>Kirim Pesan 📩</h2>
-
-      <form id="messageForm" class="notesForm" action="https://formspree.io/f/xjkakqdg" method="POST">
-        <input type="text" name="name" id="senderName" placeholder="Nama kamu" required />
-        <textarea name="message" id="senderMessage" placeholder="Tulis pesan untuk Aidil ❤️" required></textarea>
-        <div class="row">
-          <button type="submit">Kirim</button>
-        </div>
-      </form>
-
-      <p id="formStatus" style="text-align:center; color:green; font-weight:600; display:none;">
-        ✅ Pesan terkirim! Terima kasih 💖
-      </p>
-    </div>
+    </form>
+    <p id="formStatus" style="text-align:center; color:green; font-weight:600; display:none;">
+      ✅ Pesan terkirim! Terima kasih 💖
+    </p>
+  </div>
 
 
-  </main>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script src="js/app.js"></script>
 </body>

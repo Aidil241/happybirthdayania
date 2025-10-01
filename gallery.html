@@ -9,10 +9,13 @@
 </head>
 <body>
 
-  <header>📸 My Gallery</header>
+  <header><div class="top-bar">
+      <h1>📸 My Gallery</h1>
+      <a href="index.html" class="back-btn">⬅ Kembali ke Menu</a>
+    </div>
+  </header>
 
-  <a href="index.html" class="back-btn">⬅ Kembali ke Menu</a>
-
+  <main>
   <div class="gallery-container">
     <img src="Asset/Images/Gallery-1.jpg" alt="Foto 1">
     <img src="Asset/Images/Gallery-2..jpg" alt="Foto 2">
@@ -21,6 +24,7 @@
     <img src="Asset/Images/Gallery-5..jpg" alt="Foto 5">
     <img src="Asset/Images/Gallery-6..jpg" alt="Foto 6">
   </div>
+  
 
   <!-- Lightbox -->
   <div id="lightbox" class="lightbox hidden">
@@ -29,6 +33,7 @@
     <a class="prev">&#10094;</a>
     <a class="next">&#10095;</a>
   </div>
+  </main>
 
   <script src="js/gallery.js"></script>
 </body>

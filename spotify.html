@@ -7,9 +7,16 @@
   <link rel="stylesheet" href="css/spotify.css">
 </head>
 <body>
-  <main class="spotify-page">
+    <main id="homePage" class="home-page">
+    <h1>Selamat Datang 👋</h1>
+    <a href="#" id="goToMusic" class="open-music-btn">🎵 Buka Musik</a>
+  </main>
+
+  <!-- MUSIC PAGE -->
+  <main id="musicPage" class="spotify-page" style="display:none;">
+    <!-- Header -->
     <header class="header">
-      <a href="index.html" class="back-btn">🔙</a>
+      <button id="backBtn" class="back-btn">🔙</button>
       <h1>Musik Saya</h1>
     </header>
 
@@ -23,38 +30,68 @@
 
     <!-- Daftar Musik -->
     <section class="song-list">
-      <div class="song" data-src="Asset/Music/Music1.mp3">
+      <!-- contoh 10 lagu -->
+      <div class="song" data-src="Asset/Music/Music-1.mp3" data-title="Lagu Pertama" data-artist="Artis A" data-cover="Asset/covers/cover1.jpg">
         <div class="icon">🎵</div>
-        <div class="info">
-          <h3>Lagu Pertama</h3>
-          <p>Artis A</p>
-        </div>
+        <div class="info"><h3>Lagu Pertama</h3><p>Artis A</p></div>
       </div>
-      <div class="song" data-src="Asset/music2.mp3">
+      <div class="song" data-src="Asset/music2.mp3" data-title="Lagu Kedua" data-artist="Artis B" data-cover="Asset/covers/cover2.jpg">
         <div class="icon">🎶</div>
-        <div class="info">
-          <h3>Lagu Kedua</h3>
-          <p>Artis B</p>
-        </div>
+        <div class="info"><h3>Lagu Kedua</h3><p>Artis B</p></div>
       </div>
-      <div class="song" data-src="Asset/music3.mp3">
+      <div class="song" data-src="Asset/music3.mp3" data-title="Lagu Ketiga" data-artist="Artis C" data-cover="Asset/covers/cover3.jpg">
         <div class="icon">🎧</div>
-        <div class="info">
-          <h3>Lagu Ketiga</h3>
-          <p>Artis C</p>
-        </div>
+        <div class="info"><h3>Lagu Ketiga</h3><p>Artis C</p></div>
+      </div>
+      <div class="song" data-src="Asset/music4.mp3" data-title="Lagu Keempat" data-artist="Artis D" data-cover="Asset/covers/cover4.jpg">
+        <div class="icon">🎤</div>
+        <div class="info"><h3>Lagu Keempat</h3><p>Artis D</p></div>
+      </div>
+      <div class="song" data-src="Asset/music5.mp3" data-title="Lagu Kelima" data-artist="Artis E" data-cover="Asset/covers/cover5.jpg">
+        <div class="icon">🥁</div>
+        <div class="info"><h3>Lagu Kelima</h3><p>Artis E</p></div>
+      </div>
+      <div class="song" data-src="Asset/music6.mp3" data-title="Lagu Keenam" data-artist="Artis F" data-cover="Asset/covers/cover6.jpg">
+        <div class="icon">🎸</div>
+        <div class="info"><h3>Lagu Keenam</h3><p>Artis F</p></div>
+      </div>
+      <div class="song" data-src="Asset/music7.mp3" data-title="Lagu Ketujuh" data-artist="Artis G" data-cover="Asset/covers/cover7.jpg">
+        <div class="icon">🎺</div>
+        <div class="info"><h3>Lagu Ketujuh</h3><p>Artis G</p></div>
+      </div>
+      <div class="song" data-src="Asset/music8.mp3" data-title="Lagu Kedelapan" data-artist="Artis H" data-cover="Asset/covers/cover8.jpg">
+        <div class="icon">🎹</div>
+        <div class="info"><h3>Lagu Kedelapan</h3><p>Artis H</p></div>
+      </div>
+      <div class="song" data-src="Asset/music9.mp3" data-title="Lagu Kesembilan" data-artist="Artis I" data-cover="Asset/covers/cover9.jpg">
+        <div class="icon">🎼</div>
+        <div class="info"><h3>Lagu Kesembilan</h3><p>Artis I</p></div>
+      </div>
+      <div class="song" data-src="Asset/music10.mp3" data-title="Lagu Kesepuluh" data-artist="Artis J" data-cover="Asset/covers/cover10.jpg">
+        <div class="icon">🎻</div>
+        <div class="info"><h3>Lagu Kesepuluh</h3><p>Artis J</p></div>
       </div>
     </section>
-
-    <!-- Player -->
-    <footer class="player">
-      <h2 id="currentSong">Pilih lagu...</h2>
-      <audio id="audioPlayer" controls>
-        <source src="">
-        Browser tidak mendukung audio.
-      </audio>
-    </footer>
   </main>
+
+  <!-- Footer Player -->
+  <footer class="player" id="playerFooter">
+    <img id="coverArt" src="" alt="cover">
+    <div class="track-info">
+      <h3 id="currentSong">Pilih lagu...</h3>
+      <p id="currentArtist"></p>
+      <div class="controls">
+        <button id="prevBtn">⏮</button>
+        <button id="playBtn">▶</button>
+        <button id="nextBtn">⏭</button>
+        <button id="shuffleBtn">🔀</button>
+        <button id="repeatBtn">🔁</button>
+      </div>
+    </div>
+    <input type="range" id="progressBar" value="0" min="0" max="100">
+    <audio id="audioPlayer"></audio>
+  </footer>
+
   <script src="js/spotify.js"></script>
 </body>
 </html>
