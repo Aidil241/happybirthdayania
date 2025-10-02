@@ -1,0 +1,261 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: #f1d632;
+}
+.container {
+  height: 100vh;
+  width: 31.25em;
+}
+.center,
+.container * {
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+}
+.layer-1 {
+  background-color: #367bd0;
+  height: 7.5em;
+  width: 21.87em;
+  top: -7.5em;
+  background-size: 1.56em 9.37em;
+  background-position: 0 -1.25em;
+  background-image: radial-gradient(    circle at 0.78em 1em,    #f5f5f5 1.25em,    transparent 1.3em  );
+  animation: fall-1 8s forwards;
+}
+@keyframes fall-1 {
+  20% {
+    transform: translateY(35.62em);
+  }
+  100% {
+    transform: translateY(35.62em);
+  }
+}
+.back-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: #e91e63;
+  color: #fff;
+  padding: 0.6em 1.2em;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: 0.3s;
+  z-index: 10000; /* selalu di atas */
+}
+
+.back-btn:hover {
+  background: #c2185b;
+}
+
+
+.layer-1:before {
+  content: "";
+  position: absolute;
+  height: 1.25em;
+  width: 100%;
+  background-color: #f54597;
+  bottom: 0;
+}
+.layer-1:after {
+  content: "";
+  position: absolute;
+  height: 0.75em;
+  width: 0.75em;
+  background-color: #9a152b;
+  border-radius: 50%;
+  top: 2.81em;
+  left: 1.87em;
+  box-shadow: 3.12em 1.56em #f1663e, 5.31em -1em #f5e671, 9.37em 2.4em #9a152b,
+    12.5em -1.56em #f1663e, 14.68em 0 #f5e671, 18.75em 1.56em #9a152b;
+}
+.layer-2 {
+  height: 7.5em;
+  width: 15.62em;
+  background-color: #ff99b9;
+  top: -7.5em;
+  background-image: repeating-linear-gradient(    90deg,    transparent 0,    transparent 3.12em,    #ff4a83 3.12em,    #ff4a83 6.25em  );
+  animation: fall-2 8s forwards;
+}
+@keyframes fall-2 {
+  20% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(28.12em);
+  }
+  100% {
+    transform: translateY(28.12em);
+  }
+}
+.layer-3 {
+  background-color: #9a202f;
+  height: 7.5em;
+  width: 9.37em;
+  top: -7.5em;
+  background-size: 1.56em 9.37em;
+  background-position: 0 -1.25em;
+  background-image: radial-gradient(    circle at 0.78em 1em,    #ffee8d 1.25em,    transparent 1.3em  );
+  animation: fall-3 8s forwards;
+}
+@keyframes fall-3 {
+  40% {
+    transform: translateY(0);
+  }
+  60% {
+    transform: translateY(20.62em);
+  }
+  100% {
+    transform: translateY(20.62em);
+  }
+}
+.layer-3:before {
+  position: absolute;
+  content: "";
+  height: 0.93em;
+  width: 100%;
+  top: 3.12em;
+  background-color: #ffee8d;
+}
+.layer-3:after {
+  position: absolute;
+  content: "";
+  background-color: #f54597;
+  height: 1.25em;
+  width: 1.25em;
+  border-radius: 50%;
+  top: -1.25em;
+  left: 0.37em;
+  box-shadow: 1.87em 0 #f54597, 3.75em 0 #f54597, 5.62em 0 #f54597,
+    7.5em 0 #f54597;
+}
+.candle {
+  height: 3.12em;
+  width: 0.75em;
+  background-color: #3aa2cf;
+  top: -3.12em;
+  border-radius: 0.12em 0.12em 0 0;
+  animation: fall-4 8s forwards;
+
+}
+@keyframes fall-4 {
+  60% {
+    transform: translateY(0);
+  }
+  80% {
+    transform: translateY(13.12em);
+  }
+  100% {
+    transform: translateY(13.12em);
+  }
+}
+.candle:before {
+  position: absolute;
+  content: "";
+  background-color: #f1af3f;
+  height: 1.25em;
+  width: 1.25em;
+  margin: -0.25em;
+  border-radius: 50% 50% 50% 0;
+  top: -1.3em;
+  transform: rotate(135deg);
+  animation: flame 2s infinite;
+}
+/* Tambahan untuk mematikan api */
+.candle.off::before {
+  display: none; /* sembunyikan flame */
+}
+
+/* Api mati saat lilin diberi class off */
+.candle.off::before {
+  display: none;
+}
+
+/* Popup */
+.popup {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* pastikan di atas */
+}
+
+.popup-content {
+  background: #fff;
+  padding: 2em;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+.popup-content h2 {
+  margin-bottom: 1em;
+  color: #e91e63;
+}
+
+.popup-content button {
+  margin-top: 1em;
+  padding: 0.5em 1.5em;
+  border: none;
+  background: #e91e63;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+@keyframes flame {
+  50% {
+    transform: scale(0.8) rotate(135deg);
+  }
+}
+
+/* ======================
+   📱 Responsive Design
+   ====================== */
+
+/* Container otomatis menyesuaikan layar */
+.container {
+  max-width: 100%;
+  width: 90vw;   /* 90% lebar layar */
+  max-height: 100vh;
+  overflow: hidden;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Untuk iPhone 11 (375px) */
+@media (max-width: 400px) {
+  .layer-1 { width: 80%; height: 6em; }
+  .layer-2 { width: 60%; height: 5.5em; }
+  .layer-3 { width: 40%; height: 5em; }
+  .candle { height: 2.5em; width: 0.6em; }
+  .candle:before { height: 1em; width: 1em; }
+  .popup-content { width: 85%; font-size: 0.9rem; }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .layer-1 { width: 70%; height: 7em; }
+  .layer-2 { width: 50%; height: 6em; }
+  .layer-3 { width: 35%; height: 5.5em; }
+  .candle { height: 3em; width: 0.8em; }
+}
+
+/* Desktop besar */
+@media (min-width: 1200px) {
+  .layer-1 { width: 22em; height: 8em; }
+  .layer-2 { width: 16em; height: 7em; }
+  .layer-3 { width: 10em; height: 6em; }
+  .candle { height: 3.5em; width: 1em; }
+}
